@@ -1,11 +1,52 @@
-## Python, bash (UNIX shell), powershell (windows powershell)
+- [bash (UNIX shell), powershell (windows powershell)](#bash--unix-shell---powershell--windows-powershell-)
+    + [basics: bash (UNIX shell) commands](#basics--bash--unix-shell--commands)
+    + [more: bash (UNIX shell) commands](#more--bash--unix-shell--commands)
+    + [more: Powershell (Windows Shell) commands](#more--powershell--windows-shell--commands)
+    + [Escape Characters](#escape-characters)
+    + [bash: tar](#bash--tar)
+- [Python](#python)
+    + [Errors](#errors)
+    + [Version nomenclature](#version-nomenclature)
+    + [Variables, Expressions, Statements](#variables--expressions--statements)
+    + [keywords](#keywords)
+    + [reserved words](#reserved-words)
+    + [notable built-in functions](#notable-built-in-functions)
+    + [Operators](#operators)
+    + [Comparison Operators](#comparison-operators)
+    + [Boolean Operatoes](#boolean-operatoes)
+    + [if, elif, else](#if--elif--else)
+    + [while, break, continue](#while--break--continue)
+    + [iteration (for loop)](#iteration--for-loop-)
+    + [functions](#functions)
+    + [recursion](#recursion)
+    + [augmented assignment statements](#augmented-assignment-statements)
+    + [importing modules](#importing-modules)
+    + [packages](#packages)
+    + [file anatomy](#file-anatomy)
+    + [exception handling](#exception-handling)
+    + [strings](#strings)
+    + [list](#list)
+    + [dict](#dict)
+    + [Tuple](#tuple)
+    + [built-in exceptions](#built-in-exceptions)
+    + [user input](#user-input)
+    + [file methods](#file-methods)
+    + [common modules](#common-modules)
+    + [os module](#os-module)
+    + [command line arguments](#command-line-arguments)
+    + [global variables](#global-variables)
+    + [map, filter, reduce](#map--filter--reduce)
+    + [dir, help](#dir--help)
+    + [assertions, Pytest](#assertions--pytest)
+    + [regular expressions regex](#regular-expressions-regex)
 
-### Errors
-Syntax Error: related to syntax/structure of the program. program halts as soon as pythong parses program
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
-Runtime Error: error that only occurs while program is running 
 
-Semantic (Logical) Error: program runs but does not do what is expected
+
+
+# bash (UNIX shell), powershell (windows powershell)
+
 
 ### basics: bash (UNIX shell) commands
 ```shellscript
@@ -132,6 +173,16 @@ Tar -xvf my_files.tar
 |-z	|compress|
 |-x	|extract|
 
+# Python
+
+### Errors
+Syntax Error: related to syntax/structure of the program. program halts as soon as pythong parses program
+
+Runtime Error: error that only occurs while program is running 
+
+Semantic (Logical) Error: program runs but does not do what is expected
+
+
 ### Version nomenclature
 ```bash
 3.9.5
@@ -142,7 +193,7 @@ first digit: | large revamps.
 second digit:| feature additions.
 last digit: |bug fixes.
 
-## python: Variables, Expressions, Statements
+### Variables, Expressions, Statements
 
 built-in data types
 ```python
@@ -158,7 +209,7 @@ set       # sequences (iterable, mutable, unordered)
 list      # sequences (iterable, mutable, ordered)
 ```
 
-## keywords
+### keywords
 ```python
 and         # A logical operator
 as          # To create an alias
@@ -432,6 +483,46 @@ while True:
 print('Access granted.')
 ```
 
+### iteration (for loop)
+'for' loop to iterate through an iterable
+```python
+# for loop
+for i in range(4):
+	print(i)
+
+# for loop
+for item in num_list:
+	print(item)
+```
+
+'while' looop to iterate until a condition is false
+```python
+n = 5
+while n > 0:
+	print n
+	n = n - 1
+print('Blastoff!')
+
+# >>> 5
+# >>> 4
+# >>> 3
+# >>> 2
+# >>> 1
+# >>> Blastoff!
+```
+
+Can use an else statement with a for loop with a break\
+statement to do something if the for loop proceeds until\
+the end.
+```python
+>>> for i in [1, 2, 3, 4, 5]:
+>>>    if i == 3:
+>>>        break
+>>> else:
+>>>    print("only executed when no item of the list is equal to 3")
+```
+
+
 ### functions
 parameters: objects defined in a function header.\
 arguments: objects passed into a function when invoking it.
@@ -484,46 +575,6 @@ def function_var(par1, *argv, **kwargs):
 		print(item)
 	for key,item in kwargs.items():
 		print(item)
-```
-
-
-### iteration
-'for' loop to iterate through an iterable
-```python
-# for loop
-for i in range(4):
-	print(i)
-
-# for loop
-for item in num_list:
-	print(item)
-```
-
-'while' looop to iterate until a condition is false
-```python
-n = 5
-while n > 0:
-	print n
-	n = n - 1
-print('Blastoff!')
-
-# >>> 5
-# >>> 4
-# >>> 3
-# >>> 2
-# >>> 1
-# >>> Blastoff!
-```
-
-Can use an else statement with a for loop with a break\
-statement to do something if the for loop proceeds until\
-the end.
-```python
->>> for i in [1, 2, 3, 4, 5]:
->>>    if i == 3:
->>>        break
->>> else:
->>>    print("only executed when no item of the list is equal to 3")
 ```
 
 ### recursion
@@ -834,8 +885,8 @@ pet -> dog
 
 
 ### Tuple
-Tuples are like lists, but they require less memory (as they are immutable)
-created, indexed like so:
+Tuples are like lists, but they require less memory (as they are immutable)\
+They are created, indexed like so:
 ```python
 my_tuple = (1,2,3,4,'apple')
 apple_str = my_tuple[4]
@@ -885,8 +936,18 @@ ZeroDivisionError        # Raised when the second operator in a division is zero
 
 ### user input
 ```python
-input()	  # beckons 
-index()	  # Searches the tuple for a specified value and returns the position of where it was found
+input()	  # beckons user for input
+```
+
+boiler-plate code for taking input from user:
+```python
+while True
+	try:
+		user_input = input('enter a number: ')
+		numeric = float(user_input)
+		break
+	except
+		print('that is not a valid number')
 ```
 
 ### file methods
@@ -945,9 +1006,16 @@ try:
 except:
 	print('had trouble reading file')
 ```
-Split, strip, lstrip, rsplit to handle whitespace in reading files
-Split() separates by whitespace, or a different character specified by sep= parameter
+Split, strip, lstrip, rsplit to handle whitespace in reading files\
+Split() separates by whitespace, or a different character specified by sep= parameter\
 
+```python
+'r'      # Open for reading (default)
+'w'      # Open for writing, truncating (overwriting) the file first
+'a'      # Open for appending
+'rb'     # Open in binary mode (read using byte data) 
+'wb'     # Open in binary mode (read using byte data)
+```
 
 ### common modules
 
