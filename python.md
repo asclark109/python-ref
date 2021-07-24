@@ -26,35 +26,35 @@ whoami
 
 ### more: bash (UNIX shell) commands
 
-| Bash      | Description 
-| :---        |    :----   | 
-| pwd	| print working directory |
-| hostname	|my computer's network name|
-| mkdir	|make directory|
-| cd	|change directory|
-| ls	|list directory|
-| rmdir	|remove directory|
-|rm -rf |	deletes it and all its contents
-| pushd	|push directory|
-| popd	|pop directory|
-| cp	|copy a file or directory|
-|cp -r |? copy file/directory and all its contents
-| mv	|move a file or directory|
-| less	|page through a file|
-| cat	|print the whole file|
-| xargs	|execute arguments|
-| find	|find files|
-| grep	|find things inside files|
-| man	|read a manual page|
-| apropos|	find which man page is appropriate|
-| env	|look at your environment|
-| echo	|print some arguments|
-| export|	export/set a new environment variable|
-| exit	|exit the shell|
-| sudo	| DANGER! become super user root DANGER!|
-| chmod |	change the access permissions of file system objects (files and directories) sometimes  known as modes |
-|chown	| abbreviation of change owner, is used on Unix and Unix-like operating systems to change the owner of file system files, directories|
-|tar	| https://www.howtogeek.com/248780/how-to-compress-and-extract-files-using-the-tar-command-on-linux/|
+```bash
+pwd         # print working directory
+hostname    #my computer's network name|
+mkdir       #make directory|
+cd          #change directory|
+ls          #list directory|
+rmdir       #remove directory|
+rm -rf      #deletes it and all its contents
+pushd       #push directory|
+popd        #pop directory|
+cp          #copy a file or directory|
+cp -r       #? copy file/directory and all its contents
+mv          #move a file or directory|
+less        #page through a file|
+cat         #print the whole file|
+xargs       #execute arguments|
+find        #find files|
+grep        #find things inside files|
+man         #read a manual page|
+apropos     #find which man page is appropriate|
+env         #look at your environment|
+echo        #print some arguments|
+export      #export/set a new environment variable|
+exit        #exit the shell|
+sudo        #DANGER! become super user root DANGER!|
+chmod       #change the access permissions of file system objects (files and directories) sometimes  known as modes |
+chown       #abbreviation of change owner, is used on Unix and Unix-like operating systems to change the owner of file system files, directories|
+tar         #https://www.howtogeek.com/248780/how-to-compress-and-extract-files-using-the-tar-command-on-linux/|
+```
 
 examples:
 
@@ -70,30 +70,30 @@ echo $PATH
 
 ### more: Powershell (Windows Shell) commands
 
-| Windows Shell | Description |
-| :---        |    :----   | 
-|pwd	|print working directory|
-|hostname	|my computer's network name
-|mkdir	|make directory
-|cd	|change directory
-|ls	|list directory
-|rmdir	|remove directory
-|pushd	|push directory
-|popd	|pop directory
-|cp	|copy a file or directory
-|robocopy|	robust copy
-|mv	|move a file or directory
-|more	|page through a file
-|type	|print the whole file
-|forfiles	|run a command on lots of files
-|dir -r	|find files
-|select-string|	find things inside files
-|help	|read a manual page
-|helpctr	|find what man page is appropriate
-|echo	|print some arguments
-|set	|export/set a new environment variable
-|exit	|exit the shell
-|runas	|DANGER! become super user root DANGER!
+```commandline
+pwd            # print working directory|
+hostname       # my computer's network name
+mkdir          # make directory
+cd             # change directory
+ls             # list directory
+rmdir          # remove directory
+pushd          # push directory
+popd           # pop directory
+cp             # copy a file or directory
+robocopy       # robust copy
+mv             # move a file or directory
+more           # page through a file
+type           # print the whole file
+forfiles       # run a command on lots of files
+dir -r         # find files
+select-string  # find things inside files
+help           # read a manual page
+helpctr        # find what man page is appropriate
+echo           # print some arguments
+set            # export/set a new environment variable
+exit           # exit the shell
+runas          # DANGER! become super user root DANGER!
+```
 
 ### Escape Characters
 |Escape	|What it does|
@@ -280,24 +280,6 @@ hasattr()
 max()
 round()	
 ```
-
-|               |             |   built-ins  |              |                |
-|:-------------:|:-----------:|:------------:|:------------:|:--------------:|
-| abs()         | delattr()   | hash()       | memoryview() | set()          |
-| all()         | dict()      | help()       | min()        | setattr()      |
-| any()         | dir()       | hex()        | next()       | slice()        |
-| ascii()       | divmod()    | id()         | object()     | sorted()       |
-| bin()         | enumerate() | input()      | oct()        | staticmethod() |
-| bool()        | eval()      | int()        | open()       | str()          |
-| breakpoint()  | exec()      | isinstance() | ord()        | sum()          |
-| bytearray()   | filter()    | issubclass() | pow()        | super()        |
-| bytes()       | float()     | iter()       | print()      | tuple()        |
-| callable()    | format()    | len()        | property()   | type()         |
-| chr()         | frozenset() | list()       | range()      | vars()         |
-| classmethod() | getattr()   | locals()     | repr()       | zip()          |
-| compile()     | globals()   | map()        | reversed()   | \_\_import\_\_()   |
-| complex()     | hasattr()   | max()        | round()      |                |
-
 
 ```python
 abs()                 # Returns the absolute value of a number
@@ -759,17 +741,19 @@ zfill()	      # Fills the string with a specified number of 0 values at the begi
 
 string formatting:
 ```python
-'%s %s' % ('one', 'two')    # one two
-'%10s' % ('test',)          # " test"
-'%-10s' % ('test',)         # "test "
-'%.3f' % (3.1415927,)       # 3.142
-'%06.2f' % (3.1415927,)     # 003.14
+>>>'%s %s' % ('one', 'two')    # one two
+>>>'%10s' % ('test',)          # " test"
+>>>'%-10s' % ('test',)         # "test "
+>>>'%.3f' % (3.1415927,)       # 3.142
+>>>'%06.2f' % (3.1415927,)     # 003.14
 
-name = 'harry'
-day = 'thursday'
-'hello, Mr. {0}! How goes it on this {1}'.format(name,day)
+>>>name = 'harry'
+>>>day = 'thursday'
+>>>'hello, Mr. {0}! How goes it on this {1}'.format(name,day)
+'hello, Mr. harry! How goes it on this thursday'
 
->>>
+>>>''.join(['abc','d','efg'])
+'abcdefg'
 ```
 
 ### list
@@ -780,9 +764,10 @@ lists created, indexed, and concatenated like so:
 my_list = [1,2,'apple']
 apple_string = my_list[2]
 nums = my_list[0:2]
-nums = my_list[-1]			#index backwards: last element
-nums = my_list[:]			#index all elements
+nums = my_list[-1]			# index backwards: last element
+nums = my_list[:]			# index all elements
 bigger_list = my_list + [5,6]
+my_list[::-1]               # reverse list by indexing backwards
 ```
 list methods:
 ```python
