@@ -807,6 +807,29 @@ string formatting:
 'abcdefg'
 ```
 
+```python
+>>>for x in numbers:
+>>>    print "{:10.4f}".format(x)
+   23.2300
+    0.1233
+    1.0000
+    4.2230
+ 9887.2000
+```
+The format specifier inside the curly braces follows the Python format string syntax.\ Specifically, in this case, it consists of the following parts:
+
+The empty string before the colon means "take the next provided argument to format()" – in this 
+case the x as the only argument.
+
+The 10.4f part after the colon is the format specification.
+
+The f denotes fixed-point notation.
+
+The 10 is the total width of the field being printed, lefted-padded by spaces.
+
+The 4 is the number of digits after the decimal point.
+
+
 ### list
 
 lists require more memory than tuples, but are mutable.\
