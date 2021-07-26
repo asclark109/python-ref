@@ -1003,7 +1003,7 @@ writelines()    # Writes a list of strings to the file
 boiler plate code for reading files:
 ```python
 try:
-	with open('file.txt', 'r')	#open returns a “handle”
+	 with open('file.txt', 'r') as f:	#open returns a “handle”
 		for line in f:
 			Print(line)
 except:
@@ -1013,7 +1013,7 @@ Use split, strip, lstrip, rsplit to handle whitespace in reading files.\
 split() separates by whitespace
 ```python
 try:
-	with open('file.txt', 'r')	#open returns a “handle”
+	with open('file.txt', 'r') as f:	#open returns a “handle”
 		for line in f:
     		clean_line = line.strip()
     		clean_line = clean_line.lower()
@@ -1024,7 +1024,7 @@ except:
 adding to files:
 ```python
 try:
-	with open('file.txt', 'a')	#open returns a “handle”
+	with open('file.txt', 'a') as f:	#open returns a “handle”
 		f.write("hello world\n")
 except:
 	print('had trouble reading file')
