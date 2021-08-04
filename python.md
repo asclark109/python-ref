@@ -1005,7 +1005,7 @@ boiler plate code for reading files:
 try:
 	 with open('file.txt', 'r') as f:	#open returns a “handle”
 		for line in f:
-			Print(line)
+			print(line)
 except:
 	print('had trouble reading file')
 ```
@@ -1302,3 +1302,409 @@ print(("Month: %s" % (match.group(1))))
 # So this will print("24"
 print(("Day: %s" % (match.group(2))))
 ```
+
+
+### Module 5: OOP
+
+<ins>Structured programming</ins>: control flow (e.g. if/else) with repetition (e.g. for,while)\
+\
+<ins>procedural programming</ins>: problem broken in to sub-problems; still step-by-step iterations (sometimes "spaghetti" code)\
+\
+hallmark of procedural: use of functions to solve sub-problems, uses of global/local variables to store data, use of parameters to pass data to functions/procedures\
+\
+<ins>Object-oriented programming</ins>: organize functions/procedures with their required data into a single unit ("object").\
+\
+advantages of OO: reduce code duplication, resuability, manage large programs, natural fit for data and procedures.\
+\
+sometimes, the programming tasks might suggest that just a simple structural paradigm might suffice; a more complicated task involving data and procedures close together might suggest OO is a better approach.\
+
+### Object-oriented programming
+
+<ins>Object</ins>: self-contained code (method) and properties (data)\
+\
+Benefit of OO: abstraction. hides un-needed detail from other parts of the code\
+\
+Objects have properties and methods\
+\
+property: attribute or state\
+method: do something (function & procedure)\
+
+## Class
+
+<ins>Class</ins>: defines abstract characteristics of an object.\
+\
+Notably, properties and methods.\
+\
+Class is the blueprint for a user-defined type\
+\
+e.g.
+```python
+class: Dog
+	# attributes: name, color
+	# methods: bark,roll_over
+```
+
+An <ins>object</ins> is an instance of a class
+
+```Python
+class Person:
+	"""A class to hold contact info."""
+	pass
+
+# create instance
+# the capital "P" lets user know that Person is a class, so we are creating an instance of a class
+p = Person()
+
+print(p)
+# <__main__>.Person instance at 0x102449b00>
+```
+
+An "<ins>instance</ins>" is the object of a class created at runtime
+
+Its "<ins>state</ins>" is the value of the attributes.
+
+### (Class) attributes 
+
+Classes can have instance variables and class variables
+
+<ins>instance variable</ins>: holds values for a specific instance of the class
+
+In python, there's no way to explicitly define instance variables.
+
+```python
+class Cat:
+	def speak(self):
+		print('meow')
+	# ...
+
+c = Cat()
+# e.g. create an instance variable
+c.name = "Lola"
+```
+In other languages you can explicitly define instance variables. Because of this, it's good to list the attributes in the docstrong of the class in Python
+
+```python
+class Dog:
+	"""Represents man's best friends. Dogs 
+	have the following roperties:    
+	
+	Attributes:
+	     name: A string representing the name 
+		 color: A string representing the Color 
+		 age: An int representing the age
+	"""
+
+d = Dog()
+d.name = "Fido"
+d.color = "white and black"
+d.age = 5
+```
+
+<ins>class variable</ins>: belongs to the class. holds values that are the same (static) for every class.\
+\
+class variables do not need an instance of a class to exist to be called\
+
+```python
+class Dog:
+	"""Represents...
+
+	Attributes:
+	     name: A string representing the name 
+		 color: A string representing the Color 
+		 age: An int representing the age
+	"""
+	# Class variable representing legs
+	legs = 4
+
+	def bark(self):
+		print('ruff')
+```
+
+### (Class) methods
+
+A class has 'methods' that can act on an instance of it\
+\
+Functions only available to a class' instance\
+\
+also called 'messages' in somoe programming languages\
+\
+In Python, the ```self``` variable contains information about the specific instance of the class
+
+```python
+class Person:
+
+	def say_greeting(self):
+		print('hello')
+
+	def say_something(self,msg):
+		print(msg)
+
+p = Person()
+p.say_greeting()
+p.say_something('hi')
+```
+
+can use dir() obtain all attributes/methods of a class
+
+```python
+>>> dir(list)
+['__add__', '__class__', '__class_getitem__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+```
+
+In python, can declare class methods as a staticmethod or classmethod with decorators:
+
+<ins>@staticmethod</ins>: works without an instance of the class
+
+<ins>@classmethod</ins>: works with the class object
+
+```python
+class Dog:
+
+	size = 'small'
+
+	@staticmethod
+	def bark():
+		print('ruff')
+
+	@classmethod
+	def is_great_dane(cls):
+		return cls.size == 'big'
+```
+
+### Object Lifecycle
+
+Objects are created, used and destroyed during a program. Built-in methods to run when is created (constructor) and destroyed (destructor).\
+\
+Python has a special method that is called when an object is intitialized ```__init__```. Can override it to customize behavior.\
+\
+Can also override the ```__del__``` method, but usually you do not explicitly call this method. Python automatically handles memory and deletion of objects.
+
+```python
+class Dog:
+	latin_name="Canis lupus familiaris"
+	
+	def __init__(self,name):
+		self.name=name
+		
+d=Dog('Fido')
+e=Dog('Snoopy')
+```
+
+### standard methods
+
+Python has standard object methods that are sometimes useful to override:
+
+```python
+__init__(self, ...)
+# This method is called just before the newly #created object is returned for usage. 
+__del__(self)
+# Called just before the object is destroyed (which has unpredictable timing,so avoid  using this)
+__str__(self)
+# Called when we use the print function or when str() is used. 
+__lt__(self,other)
+# Called when the less than operator (<) is used. Similarly, there are special methods for all the operators (+, >, etc.)
+__getitem__(self,key)
+#Called when x[key] indexing operation is used. 
+__len__(self)
+#Called when the built-in len() function is used for the sequence object.
+```
+
+### class inheritence
+
+OOP promotes code reuse through "inheritance".\
+\
+Inheritance: process where a child class derives the attributes and methods from a parent class.\
+\
+"parent class" also called: base class, super class.\
+"child class" also called: subclass,derived  class\
+
+```python
+class Parent:
+	# attributes
+	# methods
+
+class Child(Parent):
+	# Parent attributes
+	# Parent methods
+
+	# childs attributes
+	# childs methods
+```
+Inheritance can be useful to model real-world relationships/hierarchies.\
+\
+e.g.
+```
+Parent: Animal
+Child: Dog, Cat, Rabbit
+
+Parent: Person
+Child: Student, Teacher
+```
+Inheritance can be overkill. Think about benefits/costs. Consider whether inheritance is actually providing benefits:\
+\
+e.g.
+```
+Parent: Item
+Child: Car, Bread, Skate
+```
+It is possible to have multiple levels of inheritance, but it is difficult to get right (i.e. inheriting from 2 super classes).
+
+### Abstract Class
+
+It's not uncommon to declare a base class that will never be used directly. This is called an "Abstract Class".\
+\
+e.g.
+```
+class: Vehicle
+subclasses: car, truck, motorcycle,...
+```
+
+### Networking
+
+<ins>Networking</ins>: interconnection of multiple devices connected using multiple paths for the purpose of sending/receiving data or media.\
+\
+Modern languages will have established practices/code/libraries for communication with other computers.\
+\
+Most difficulties will be related to efforts:
+```
+signal:         do you have good connection to internet?
+connection:     connection type? 5G or dialup modem?
+API: 
+Servers:        server down?
+...
+```
+
+<ins>HTTP</ins> is an agreed upon protocol for requesting/responding, sending/retreiving data.\
+\
+It's not only way to send data, but it is probably the most popular. This is because HTML is probably the most popular way to send data on the web, which uses HTTP; hence, why HTML is the most used protocol for the web.\
+\
+Other data formats: text, XML, JSON, binary,...\
+\
+Services have an <ins>Application Programming Interface (API)</ins> that they specify how others can use their data.\
+\
+User of an API is a "<ins>consumer</ins>".\
+\
+Many technologoies that support services:\
+\
+<ins>REST</ins>: Representational State Transfer\
+<ins>SOAP</ins>: Simple Object Access Protocol\
+\
+REST, SOAP, implemented by practice. REST, SOAP, can be seen as agreed upon practices.\
+\
+e.g. Google Maps API
+```
+HTTP://MAPS.GOOGLEAPIS.COM/MAPS/API/GEOCODE/JSON?SENSOR=FALSE&ADDRESS=CHICAGO%2C+MI
+```
+
+The bad stuff:
+```
+ISO 8601 Date/Time Format   # not all web services use the same date/time format
+Authentication              # as consumer of API, can be a bit of work to establish authentication (add level of complexity to working with web services)
+Rate Limits                 # serivce might have rate limits
+Payment                     # usually free quota, but use of large scale requires payment
+```
+
+Web browsers read and parse HTML to present it more cleanly.\
+\
+XML is used mostly for data transportation. It usually meant to be fed into another application; hence, not usually rendered for visualization like HTML. Typically, XML is considered verbose and overkill for most uses.\
+\
+JSON: JavaScript Object Notation. Now, it is used everywhere and is considered the standard way to share text based data. JSON data pretty easy to parse with Python.\
+\
+JSON is a syntax for storing and exchanging data. It works great in Python. Take a look at the ```json``` standard library in python.
+```python
+import json
+data='''{
+	"name" : "Mickey Mouse",
+	"phone" : {
+		"type" : "intl",
+		"number" : "+1 734 303 4456"
+	},
+	"email" : {
+		"hide" : "mickey@disney.com"
+	}
+}'''
+	
+info=json.loads(data)
+# json.loads() converted str json data to dict
+
+print'Name:',info["name"]
+print'Hide:',info["email"]["hide"]
+```
+
+bringing in data:
+```python
+import json
+data = {
+	"number":1,
+	"name":"Mickey Mouse"
+	}
+
+# load to JSON data
+info=json.dumps(data)
+
+print type(info["number"])
+```
+
+### Networking Modules
+
+To request a response from the server, there are mainly two methods:
+<ins>GET</ins>: to request data from server\
+<ins>POST</ins>: to submit data to be processed to the server\
+\
+Most popular networking modules in python:
+```
+httplib
+requests (most popular)
+urllib
+```
+
+e.g.
+```python
+import requests
+import json
+
+url='https://....'
+r=requests.get(url)
+
+json_data=r.json()
+
+for item in json_data:
+	# parse away
+```
+
+e.g. requesting repos from GitHub
+```python
+import requests
+import json
+
+url="https://api.github.com/repos/.../issues?state=all&per_page=10"
+
+r=requests.get(url)
+
+for item in r.json():
+	print("> ",item["title"],item["user"]["login"])
+
+message=r.json()
+```
+
+e.g. request location from google maps API
+```python
+import requests 
+
+# api-endpoint
+URL="http://maps.googleapis.com/maps/api/geocode/json"
+
+# location given here
+location="chicago"
+
+# Params dict for the parameters to be sent to the API
+PARAMS= {'address':location}
+
+# sending get request and saving the response
+# as response object 
+r=requests.get(url=URL,params=PARAMS)
+
+# extracting data in json format
+data=r.json()
+```
+JSON reults are a dictionary with keys.
