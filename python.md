@@ -1708,3 +1708,630 @@ r=requests.get(url=URL,params=PARAMS)
 data=r.json()
 ```
 JSON reults are a dictionary with keys.
+
+
+### Algorithm Analysis
+
+<ins>Algorithm</ins>: step-by-step instructions to solve a problem (not a program). An algorithm should be "robust"; i.e., solve the problem for all sets of inputs and outputs, handle all error conditions, and be deterministic (same output for same set of inputs)\
+
+<ins>Program</ins>: implementation of an algorithm (in a programming language). In fact, may use many algorithms\
+
+<ins>Correctness</ins>:  algorithm provides correct solution to the problem
+
+<ins>Efficiency</ins>: two types \
+Time: how long does it take to solve problem\
+space: how much memory is needed?
+
+Benchmarking vs analysis (i.e. real world performance): consider best case scenario, worst case scenario, and also average performance.
+
+Consider also: ease of understanding, program maintenance, elegance.
+
+Might be many different algorithms that solve the same probelm. how to measure what the "best" algorithm might be?:\
+
+<ins>running time</ins>: very hardward dependent. not a great measure. Implementation details might vary (i.e. different implementations of the same algorithms. It'd be best to have a metric that is agnostic to these facts.\
+
+<ins>Number of steps</ins>: if an algorithm is just a procedure consisting of a number of steps, then we can just count the number of steps.
+
+<ins>Algorithm Analysis</ins>: concerned with comparing algorithms based upon the amount of computing resources that each algorithm uses (time, money: e.g. cloud computing services?, or even human resources: e.g. could pay 10 best computer scientist to spend a year to develop an incredible algorithm, but need to pay them for their time...was the algorithm worth the salary/time cost of developing the algorithm? So, more factors to consider than cost of literal computing resources).\
+
+e.g. 3 different algorithms for removing elements of a list holding a "0":
+
+|	| Space | Time |
+| :---        |    :----   |  :----   | 
+| Shuffle Left  | constant  | go through list many times | 
+| Copy Over	| double | go through list once |
+| Converging Pointers	|  constant | go through list once |
+
+Measuring Efficieny: could time the program, but that depends on machine speed and thus is not very meaningful more globally, so it is better to count the steps of the program/algorithm. Ask the question: "how many 'fundamental steps' does the algorithm take"?\
+
+Runtime depends on size and type of input. Interested in: best-case scenario, worst-case scenario, worst-case scenario.\
+
+To compare algorithms, their relative rate of growth is important.\
+
+<ins>Order of Magnitude O(f(n))</ins>: measures how the number of steps grows with input size (n). For dominant part of the algorithm.\
+
+Let T() be the exact number of steps. T(n), T(5n), T(5n+100), T(4500n+2000) all have approximately the same approximate growth in input size n (they all grow linearly with n)
+
+### Big-O notation (Landau's symbol)
+
+Describes how fast an algorithm grows relative to the input. Describes the amount of time an algorithm needs to run by analyzing asymptotic behavior of functions. e.g. as sample size n goes to infinity.\
+
+<ins>Order of Magnitude O(f(n))</ins>: measures how the number of steps grows with input size (n). For dominant part of the algorithm.\
+
+Let T(n) represent the exact run time (or steps) of an algorithm as a function of number of inputs, n.\
+
+Let O(n) represent the approximate run time (or steps) as a function of number of inputs, n.\
+
+E.g. T(n) = 1 + n^2 + log(n) + n. Then, O(T(n)) = n^2\
+
+```
+O(5n)                  = O(n)
+O(n^2-n+5)             = O(n^2)
+O(2n^3 - 4n + 9)       = O(n^3)
+O(n^2log(n) + n^2 + 2) = O(n^2log(n))   
+```
+
+ranking
+```
+O(1)             # constant time              best
+O(log n)         # logarithmic time           pretty great
+O(n)             # linear time                good
+O(n log n)       # log-linear "linearithmic"  descent
+O(n^2)           # quadratic time             kind of slow
+O(n^3)           # cubic time                 poor performance
+O(2^n)           # exponential time           very poor
+O(n!)            # factorial time             intolerably slow
+```
+
+examples\
+O(1)
+```python
+def isTrue(value):
+	return True
+```
+O(n)
+```python
+def findNumber(number, list):
+	for i in list:
+		if i == number:
+			return number
+```
+O(n^2)
+```python
+n=3
+for i in range(n):
+	for j in range(n):
+		x = i
+		y = j
+		print("[%s,%s]" % (x,y))
+```
+
+If two algorithms have the same time complexity e.g. O(n), but one algorithm has more steps T(n) = 2n versus T(n) = 10n, we say the algorithms have equal time scaling, but one will be faster in practice.\
+
+In other words, when looking at big-O notation we are concerned with relative rate of growth, rather than actual time.\
+
+If-else statements are handled by considering the worst case scenario of the two cases.\
+
+For loops execute n times, where n is the size of the number of loop iterations.\
+
+An algorithm is O(log n) if it takes constant time O(1) to cut the problem size by a fraction. Good example is binary search: technique for searching for an item in a sorted list. The problem size is halved with each iteration. O(log n) efficient for handling large datasets.
+
+If a problem must be solved with an exponential time algorithm, it is typically called <ins>intractible</ins>, meaning it is solvable, but not within practical time limits.
+
+### Timing code
+
+Things to consider:\
+
+Resource allocations: if a computer is running multiple processes in background already, taking up memory, that might have an effect on how fast code runs.\
+
+coffee breaks: i.e. if people have other tasks to do, does the code really need to run in 2 minutes rather than 5 minutes? Consider the practical use cases for the program. Running in 2 minutes versus 5 minutes might not make all the much of a practical difference.\
+
+Costs: e.g. cloud computing environment. Memory might more expensive than computing cycles. you might pay extra for a faster processor, or you might pay extra for greater bandwidth. It could be cheaper to run faster but take more memory, and you could analyze that and determine what the most cost effective computing solution is. You could be doing a tremendous amount of downloading and uploading, and so maybe it makes sense to pay for a slow processor because most of the work is not related to the processor. etc.
+
+You can use the UNIX utility 'time' to time code. "real" time refers to actual clock time elapsed (i.e. looking at the clock before and after). "user" time refers to amount of CPU time spent outside the kernal; might not be relevant based on the type of computing the program is doing. "sys" time refers to the amount of CPU time spent inside the kernel specific functions. Most important is probably the "real" time. user and sys time is helpful for getting information about the application performs on your system. I.e. if your user + sys time is less than real time, then you might have I/O issues (a lot of the time spent in your program is spent reading and writing to files and is not really a problem associated with your program).
+
+```bash
+>time python yourprogram.py
+
+real    0m1.028s
+user    0m0.001s
+sys     0m0.003s
+```
+
+examples:
+
+```bash
+>time echo "hello world"
+hello world
+
+real    0m0.000s
+user    0m0.000s
+sys     0m0.000s
+```
+
+```bash
+>time sleep 5
+
+
+real    0m5.005s
+user    0m0.001s
+sys     0m0.002s
+```
+
+```bash
+>more test.py
+for i in range(1000):
+    print(i)
+
+>time python test.py
+1
+2
+...
+999
+
+real    0m0.047s
+user    0m0.030s
+sys     0m0.012s
+```
+
+```time``` module in python standard library helpful. timing the beginning and end of the function is helpful to measure the actual timing of the function, preventing the timing of other computer processes from obfuscating the time it takes for the actual code to run.
+```python
+# my_script.py
+import time
+
+def timed_func():
+	start = time.time()
+	
+	for i in range(10000000):
+		total = total + 1000
+
+	end = time.time()
+	print("%10.7f s" % (end-start))
+
+timed_function()
+```
+
+```bash
+>python my_script.py
+
+0.5992429 seconds
+```
+Each time the function is timed, the time will be different. This is because each time the code run, it is competing for resources with the rest of the processes happening on the computer (the amount of computing resources used by a CPU at any given time transient).
+
+Can implement your own timer:
+```python
+import time
+
+class Timer:
+	def __enter__(self):
+		self.start = time.time()
+		return self
+
+	def __exit__(self):
+		self.end = time.time()
+		self.seconds = self.end - self.start
+```
+
+```python
+# script.py
+with Time() as t:
+	for i in range(10000):
+		x = 10
+print(t.seconds)
+```
+
+```bash
+>python script.py
+0.00026...
+```
+
+Above technique is very helpful to time code in many different places and not have to write time statements everywhere.
+
+### Data Serialization (Pickle)
+
+```Pickle``` implements binary protocols for serializing and de-serializing pythonobjects. Serialize is a fancy word that means turn objects into data that can be persistent (can save data objects to disks and then later on get them from the disk and bring them back into an application).
+
+Pickling is a process whereby a python object hierarchy is converted into a byte stream. Unpickling is the inverse operation.
+
+serialization: Object --> stream of bytes --> (written to memmory) or (written to file)
+
+deserialization: (data in memmory) or (data in file) --> stream of bytes --> object
+
+serialization in other languages might be called "marshalling", "flattening", or "arching".
+
+example: serialization, writing data to file
+```python
+import pickle
+
+fav_color = {"lion": "yellow", "kitty":"red"}
+
+with open('color.pickle', 'wb') as f:
+	pickle.dump(fav_color,f)
+```
+
+Keep in mind, pickled data not inherently safe. Can easily be read by opening the file. In standard library, a warning is issued with the pickle module because it is not secure against erroneously or maliciously constructed data. Never unpickle data received from untrusted or unauthenticated sources.
+
+example: deserialization, reading data from file
+```python
+import pickle
+
+with open('color.pickle', 'rb') as f:
+	fav_color = pickle.laod(f)
+```
+
+remember file extensions do not physically mean anything. Saving the file with the extension ".pickle" is simply good etiquette for letting others know it is a pickle file.
+
+JSON vs pickle: JSON has text serialization only. However, JSON is human readable (pickle files not very readable). JSON is not language specific... it is the defacto language standard right now way for sending data around the web (pickle strictly limited to python). However, the advantages of using Pickle are that it allows serialization of custom objects in python, and because the data is stored in binary format, it is in fact faster to read in / send data than by doing so with JSON data (i.e. if you are working with binary data, you are working with less data)
+
+### Higher Order Functions
+
+Python functions are "first-class citizens", meaning they can be passed around by name.
+
+<ins>Higher Order Functions</ins> are functions that operate on other functions: take a function as argument and return a function.
+
+```python
+def f(x):
+	""""""
+	return x*2
+
+g = lambda x: x*2
+
+print(f(2))
+print(f(4))
+```
+
+```map, reduce, filter``` are helpful higher order functions in python. ```lambda``` is a useful feature as parameters to higher order functions.
+
+Some programming languages exclusively use functional programming paradigm (e.g. Haskell).
+
+Technically, Python's features of mutability and data structures don't allow true functional programming functionality. Python's focus on practicality has led it to assimilate many features of functional programming.
+
+```map()``` is a function that applies a function to all members of a sequence. Returns the result as a map object.
+
+Example
+
+```python
+# example procedural style
+def squared(x):
+	return x**2
+
+numbers = [1,2,3,4,5,6]
+
+squared_nums = []
+for i in numbers:
+	squared_nums.append(squared(i))
+
+# example functional style
+
+squared_nums = list(map(squared,numbers))
+```
+
+```lambda``` operator creates small anonymous (unnamed) functions. Found in many languages (Swift, python, LISP). Core feature of other languages (Haskell, OCaml).
+
+```python
+# lambda syntax
+
+result = lambda arglist: expression
+
+# ex
+f = lambda x,y: x+y
+```
+
+Use of lambda is mostly a matter of style. Makes sense to use lambda when you're going to use a function one time.
+
+Useful for sorting.
+
+```python
+people.sort(key=lambda x: x.name)
+people.sort(key=lambda x: x.age)
+sorted(people, key = lambda x: x.name)
+```
+
+```lambda``` also useful in the sense it can be used in higher order function calls. allows us to create functions in-situ as needed:
+
+```python
+nums = [1,2,3,4,5,6,7]
+nums_squared = map(lambda x: x**2, nums)
+```
+
+```filter()``` runs through each element on an iterable object, applies a function to each element, returns only elements of list that evaluate to True.
+
+```python
+result = filter(lambda x: x ==True, [True, False, True])
+```
+
+```filter()``` runs through each element on an iterable object, applies a function to each element, returns only elements of list that evaluate to True.
+
+```python
+def even(x):
+	return x % 2 == 0
+
+fib = [1,1,2,3,5,8,13,21,34,55]
+result = filter(even, fib)
+# [2,8,34]
+```
+
+can simplify more:
+```python
+fib = [1,1,2,3,5,8,13,21,34,55]
+result = filter(lambda x: x % 2 == 0, fib)
+# [2,8,34]
+```
+
+```python
+# remove all "0" from a list
+nums = [1,4,0,4,5,7,78,20,11,0,2,0]
+result = filter(lambda x: x != 0, nums)
+# [1,4,4,5,7,78,20,11,2]
+```
+
+```reduce()``` continually applies a function to an iterable with the sum to create a cumulative sum of the results, returning a single value. Reduce not in std library. Import from ```functools```.
+
+```python
+from functools import reduce
+reduce(function,iterable[,initializer])
+```
+
+ex:
+```python
+from functools import reduce
+reduce(lambda x,y: x+y,[1,1-2]])
+# 0
+
+reduce(lambda x,y: x+y,["c","a","t"]])
+# "cat"
+
+nums = [92, 26, 34, 26, 39, 40]
+avg = reduce(lambda x,y: x+y, nums) / len(nums)
+```
+
+The ```map-reduce-filter``` pattern is a framework for processing huge datasets on distributable problems, which was heart of Google data processing for years. The Hadoop framework is one of the most popular frameworks for map-reduce today.
+
+The map-reduce premise involves taking lots of data at a repository, breaking into chunks, assigning it to multiple processor nodes ('map' step), then in a reduce step has processor nodes reduce the data back together.
+
+FYI, the reduce() function is a bit overkill. Quote from Guido Van Rossum
+
+```
+"So now reduce(). This is actually the one I've always hated most, because, apart from a few examples involving + or *, almost every time I see a reduce() call with a non-trivial function argument, I need to grab pen and paper to diagram what's actually being fed into that function before I understand what the reduce() is supposed to do. So in my mind, the applicability of reduce() is pretty much limited to associative operators, and in all other cases it's better to write out the accumulation loop explicitly."
+```
+
+List comprehension provide a more readable way to perform higher-order functions.
+
+### List Comprehension
+
+List comprehension is a way to define and create lists in Python:
+
+```python
+new_list = [expression for member in iterable]
+```
+
+The intent behind the notation of list comprehensions was to mimic well-known notation for sets use by mathmaticians. For example, "x^2 for x in the set of real numbers":
+
+```python
+squared_nums = [x**2 for x in nums]
+```
+
+Here's an example of how a list comprehension can be more elegant than using higher order functions:
+```python
+# higher order functions
+squares = list(map(lambda x: x*x, list(range(10))))
+
+# list comprehensions
+squares = [i*i for i in range(10)]
+```
+
+more examples:
+```python
+def get_price_w_tax(txn):
+	return txn * (1 + TAX_RATE)
+
+purchases = [1.09, 23.54, 23.10]
+final_prices = [get_price_w_tax(i) for i in purchases]
+```
+
+example of cross products:
+```python
+# cross product of lists
+colors = ["red", "green", "yellow", "blue"]
+objs = ["house","car","tree"]
+colored_objs = [ (x,y) for x in colors for y in objects]
+```
+
+list comprehensions very versatile:
+```python
+nums = [(1,1),(2,2),(3,3),(4,4)]
+sums = [x+y for x,y in nums]
+```
+
+Can use conditional logic in list comprehensions.
+```python
+new_list = [expression for member in iterable if condition]
+```
+
+ex:
+```python
+sentence = 'once upon a time in mexico'
+
+vowels = [letter for letter in sentence if letter in 'aeiou']
+```
+
+```python
+def is_vowel(letter):
+	vowels = 'aeious
+	return letter in vowel
+
+vowels = [letter for letter in sentence if is_vowel(letter)]
+```
+
+Can use if statement statements in the expression within list comprehension:
+```python
+data = [i if not isinstance(i,str) else 0.0 for i in original_data]
+```
+
+Can also use set and dictionary comprehension, but these are not very common:
+```python
+quote = "something wicked this way comes."
+vowels = {i for i in quote if i in 'aeiou'}
+# {'a','o','e','i'}
+```
+
+```python
+# unique cross product of lists
+colors = ["red", "green", "yellow", "blue"]
+objs = ["house","car","tree"]
+colored_objs = { (x,y) for x in colors for y in objects}
+```
+
+dictionary comprehension:
+```python
+squares = {i : i*i for i in range(10)}
+```
+
+can use list comprehensions to return a generator:
+```python
+for i in (x*2 for x in range(10)):
+	print(i)
+```
+
+List comprehension is simply another tool to help accomplish tasks that may or may not simplify code.
+
+### Iterators and Generators
+
+<ins>Iterators</ins> provide a mechanism to move through a collection. Iterator is any type that can be used in 'for in' loop.
+
+e.g.
+```python
+for i in range(0,100):
+	# stuff
+```
+
+```List, tuple, dict, set``` are standard python iterables.
+
+```map(),reduce(),zip()``` are also iterables.
+
+File handles are also iterables:
+```python
+f = open("myfile.txt")
+for line in f.readlines:
+	# stuff
+```
+
+So, an iterable object is something that we can define what we want returned from a collection of some type. File is an iterator that returns the next line, string returns the next character, list returns the next element.
+
+The behavior of an iterable by implementing the following special python methods: ```__iter__()```, ```__next__()```.
+
+```__iter__()``` is called when the iteration is initialized. example:
+```python
+def __iter__(self):
+	self.x = 0
+	return self
+
+def __next__(self):
+	# store current value of x
+	x = self.x
+
+	# stop iteration if limit is reached
+	if x > self.limit:
+		raise StopIteration 
+		# ^this stops iteration. doesn't throw error. 
+
+	# else increment and return old value
+	self.x = x+1
+	return x
+```
+
+example implementation:
+```python
+class Counter:
+	def __iter__(self):
+		self.count = 0
+		return self
+
+	def __next__(self):
+		self.count += 1
+		if self.count > 10:
+			raise StopIteration
+		return self.count
+
+c = Counter()
+for i in c:
+	print(i)
+```
+
+Some of the built-in python functions like ```list,sum,min,max``` know about iterators:
+```python
+list(Counter())
+sum(Counter())
+min(Counter())
+max(Counter())
+```
+
+<ins>Generators</ins>: are python functions that generate iterators. These can be more powerful and potentially more convenient that iterators.
+
+Generators rely on a function called ```yield```, which returns a generator that runs the code you have written:
+
+```python
+def count_from(i):
+	while True:
+		yield i
+		i+=1
+
+numbers = count_from(1)
+print(numbers.next()) # 1
+print(numbers.next()) # 2
+print(numbers.next()) # 3
+```
+
+How to make a generator: write a regular function and call yield to produce a value. When another value is needed, the generator function picks up where it left off. Raise the StopIteration exception or call return when you are done.
+
+```python
+def big_random_num():
+	while True:
+		num = random.randint(1,100)
+		print(num)
+		if num < 10:
+			print("less than 10")
+			raise StopIteration
+		else:
+			yield number
+
+for random_num in big_random_num():
+	print("number is ... %d!" (random_num))
+```
+
+Since python 3.5, ```StopIteration``` has been replaced with solely ```return```, I think. See next section on creating environments (i.e. to be able to run python 3.4 if you had code that used StopIteration, and you needed to be able to run that code).
+
+You can do wonky things with generators
+```python
+def generate_stuff():
+	x=2
+	y=3
+	yield x,y,x+y
+	yield "hi"
+	yield "bye"
+	return
+
+g = generate_stuff():
+print(g.next()) # (2,3,5)
+print(g.next()) # Hi
+print(g.next()) # Bye
+```
+
+### creating environments
+
+By default, with anaconda the ```base``` environment is used. We can setup developments specifically for projects, however.
+
+e.g. setting up python 3.4 environment. name it py34
+```bash
+>conda create --name py34 python=3.4
+```
+
+To activateenvironment:
+```bash
+>conda activate py34
+```
+
+To deactivate environment:
+```bash
+>conda deactivate py34
+```
