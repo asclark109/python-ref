@@ -39,10 +39,27 @@
     + [dir, help](#dir--help)
     + [assertions, Pytest](#assertions--pytest)
     + [regular expressions regex](#regular-expressions-regex)
+    + [Module 5: OOP](#module-5--oop)
+    + [Object-oriented programming](#object-oriented-programming)
+  * [Class](#class)
+    + [(Class) attributes](#-class--attributes)
+    + [(Class) methods](#-class--methods)
+    + [Object Lifecycle](#object-lifecycle)
+    + [standard methods](#standard-methods)
+    + [class inheritence](#class-inheritence)
+    + [Abstract Class](#abstract-class)
+  * [Networking](#networking)
+  * [Networking Modules](#networking-modules)
+  * [Algorithm Analysis](#algorithm-analysis)
+  * [Big-O notation (Landau's symbol)](#big-o-notation--landau-s-symbol-)
+  * [Timing code](#timing-code)
+  * [Data Serialization (Pickle)](#data-serialization--pickle-)
+  * [Higher Order Functions](#higher-order-functions)
+  * [List Comprehension](#list-comprehension)
+  * [Iterators and Generators](#iterators-and-generators)
+  * [creating environments](#creating-environments)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
-
 
 
 # bash (UNIX shell), powershell (windows powershell)
@@ -1559,7 +1576,7 @@ class: Vehicle
 subclasses: car, truck, motorcycle,...
 ```
 
-### Networking
+## Networking
 
 <ins>Networking</ins>: interconnection of multiple devices connected using multiple paths for the purpose of sending/receiving data or media.\
 \
@@ -1645,7 +1662,7 @@ info=json.dumps(data)
 print type(info["number"])
 ```
 
-### Networking Modules
+## Networking Modules
 
 To request a response from the server, there are mainly two methods:
 <ins>GET</ins>: to request data from server\
@@ -1710,7 +1727,7 @@ data=r.json()
 JSON reults are a dictionary with keys.
 
 
-### Algorithm Analysis
+## Algorithm Analysis
 
 <ins>Algorithm</ins>: step-by-step instructions to solve a problem (not a program). An algorithm should be "robust"; i.e., solve the problem for all sets of inputs and outputs, handle all error conditions, and be deterministic (same output for same set of inputs)\
 
@@ -1752,7 +1769,7 @@ To compare algorithms, their relative rate of growth is important.\
 
 Let T() be the exact number of steps. T(n), T(5n), T(5n+100), T(4500n+2000) all have approximately the same approximate growth in input size n (they all grow linearly with n)
 
-### Big-O notation (Landau's symbol)
+## Big-O notation (Landau's symbol)
 
 Describes how fast an algorithm grows relative to the input. Describes the amount of time an algorithm needs to run by analyzing asymptotic behavior of functions. e.g. as sample size n goes to infinity.\
 
@@ -1818,7 +1835,7 @@ An algorithm is O(log n) if it takes constant time O(1) to cut the problem size 
 
 If a problem must be solved with an exponential time algorithm, it is typically called <ins>intractible</ins>, meaning it is solvable, but not within practical time limits.
 
-### Timing code
+## Timing code
 
 Things to consider:\
 
@@ -1927,7 +1944,7 @@ print(t.seconds)
 
 Above technique is very helpful to time code in many different places and not have to write time statements everywhere.
 
-### Data Serialization (Pickle)
+## Data Serialization (Pickle)
 
 ```Pickle``` implements binary protocols for serializing and de-serializing pythonobjects. Serialize is a fancy word that means turn objects into data that can be persistent (can save data objects to disks and then later on get them from the disk and bring them back into an application).
 
@@ -1963,7 +1980,7 @@ remember file extensions do not physically mean anything. Saving the file with t
 
 JSON vs pickle: JSON has text serialization only. However, JSON is human readable (pickle files not very readable). JSON is not language specific... it is the defacto language standard right now way for sending data around the web (pickle strictly limited to python). However, the advantages of using Pickle are that it allows serialization of custom objects in python, and because the data is stored in binary format, it is in fact faster to read in / send data than by doing so with JSON data (i.e. if you are working with binary data, you are working with less data)
 
-### Higher Order Functions
+## Higher Order Functions
 
 Python functions are "first-class citizens", meaning they can be passed around by name.
 
@@ -2097,7 +2114,7 @@ FYI, the reduce() function is a bit overkill. Quote from Guido Van Rossum
 
 List comprehension provide a more readable way to perform higher-order functions.
 
-### List Comprehension
+## List Comprehension
 
 List comprehension is a way to define and create lists in Python:
 
@@ -2195,7 +2212,7 @@ for i in (x*2 for x in range(10)):
 
 List comprehension is simply another tool to help accomplish tasks that may or may not simplify code.
 
-### Iterators and Generators
+## Iterators and Generators
 
 <ins>Iterators</ins> provide a mechanism to move through a collection. Iterator is any type that can be used in 'for in' loop.
 
@@ -2317,7 +2334,7 @@ print(g.next()) # Hi
 print(g.next()) # Bye
 ```
 
-### creating environments
+## creating environments
 
 By default, with anaconda the ```base``` environment is used. We can setup developments specifically for projects, however.
 
@@ -2326,7 +2343,7 @@ e.g. setting up python 3.4 environment. name it py34
 >conda create --name py34 python=3.4
 ```
 
-To activateenvironment:
+To activate environment:
 ```bash
 >conda activate py34
 ```
